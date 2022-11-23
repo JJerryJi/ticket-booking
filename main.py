@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 username = "jerryji040506"
 password = "Jzx20040506!!"
 # JWC - Badminton Ct #1
-url1= "https://secure.recreation.ucla.edu/booking/b2f7d448-aaff-4d93-969f-2083fa1cb9e3"
+url1= "https://secure.recreation.ucla.edu/booking/14ded8d8-65d9-405f-8127-ffda2c6b6759"
 # JWC - Badminton Ct #2
 url2= "https://secure.recreation.ucla.edu/booking/32738a56-3268-4037-98c5-e2d9d6d165d9"
 # JWC - Badminton Ct #2
@@ -21,27 +21,28 @@ date= "wed"
 driver = webdriver.Chrome()
 
 
+
 driver.get("https://secure.recreation.ucla.edu/booking#")
 
+time.sleep(0.5)
 WebDriverWait(driver, 10).until(lambda x: x.find_element(By.ID, "loginLink")).click()
 
 
-WebDriverWait(driver, 10).until(lambda x: x.find_element(By.XPATH,"//*[@id='section-sign-in-first']/div[6]/div/button/span/span[2]")).click()
+WebDriverWait(driver, 100).until(lambda x: x.find_element(By.XPATH,"//*[@id='section-sign-in-first']/div[6]/div/button/span/span[2]")).click()
 # driver.find_element(By.XPATH,"//*[@id='section-sign-in-first']/div[6]/div/button/span/span[2]").click()
 
 driver.find_element(By.ID,"logon").send_keys(username)
 driver.find_element(By.ID,"pass").send_keys(password + Keys.ENTER)
 
+driver.implicitly_wait(50)
+time.sleep(30)
+driver.get(url1)
 
 
-
-
-
-
-WebDriverWait(driver,200).until(lambda x: x.find_element(By.XPATH, "//*[@id='divBookingProducts-small']/div[2]/a")).click()
+time.sleep(2)
 elements = driver.find_elements(By.CSS_SELECTOR,"Button.btn single-date-select-button single-date-select-one-click btn-primary")
 for e in elements:
-    if(e.get_attribute("data-date-text")=="Nov 23, 2022"):
+    if(e.get_attribute("data-date-text")=="Nov 24, 2022"):
         e.click()
 
 
