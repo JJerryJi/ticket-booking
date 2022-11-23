@@ -27,9 +27,7 @@ time.sleep(3)
 driver.find_element(By.ID,"logon").send_keys(username)
 driver.find_element(By.ID,"pass").send_keys(password + Keys.ENTER)
 
-element = WebDriverWait(driver, 20).until(lambda x: x.find_element(By.ID, 'container-image-item booking-product-image'))
-
-element.click()
+WebDriverWait(driver, 20).until(lambda x: x.find_element(By.ID, 'container-image-item booking-product-image')).click()
 
 time.sleep(2)
 driver.close()
