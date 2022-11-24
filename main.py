@@ -18,37 +18,53 @@ url3= "https://secure.recreation.ucla.edu/booking/24b49a8f-ae2e-4f2e-93ce-0adfbc
 date= "wed"
 
 # initialize the Chrome driver
-driver = webdriver.Chrome()
+class autologin():
+    def __init__(self,link) -> None:
+        self.driver= webdriver.Chrome("./chromedriver")
+        self.target_url=link
+        self.status = 0 # 0: ticket not booked; 1:ticket booked  
+
+    def setup(self):
+        self.driver.get("https://secure.recreation.ucla.edu/booking#")
+        time.sleep(0.2)
+        WebDriverWait(self.driver, 10).until(lambda x: x.find_element(By.ID, "loginLink")).click()
+        WebDriverWait(self.driver, 100).until(lambda x: x.find_element(By.XPATH,"//*[@id='section-sign-in-first']/div[6]/div/button/span/span[2]")).click()
+
+        
+        self.driver.find_element(By.ID,"logon").send_keys(username)
+        self.driver.find_element(By.ID,"pass").send_keys(password + Keys.ENTER)
+
+        # Bug here
+        
+        # WebDriverWait(self.driver, 20).until
+        #     EC.visibility_of_element_located((By.ID, "sidebar"))
+        #     )
+        # time.sleep(1)
+        # while self.status == 0:
+        #     time.sleep(1)
+        # WebDriverWait(self.driver, 20).until(lambda x: x.get(self.target_url))
+        time.sleep(20)
+        self.driver.get(self.target_url)
+        
+        self.driver.find_element(By.XPATH, "//*[@id='divBookingDateSelector']/div[2]/div[2]/button[2]").click()
+    
+    
+    
+    def teardown(self):
+        self.driver.close()
+
+
+if __name__ == '__main__':
+    a = autologin(url1)
+    a.setup()
+    a.teardown()
 
 
 
-driver.get("https://secure.recreation.ucla.edu/booking#")
-
-time.sleep(0.5)
-WebDriverWait(driver, 10).until(lambda x: x.find_element(By.ID, "loginLink")).click()
-
-
-WebDriverWait(driver, 100).until(lambda x: x.find_element(By.XPATH,"//*[@id='section-sign-in-first']/div[6]/div/button/span/span[2]")).click()
-# driver.find_element(By.XPATH,"//*[@id='section-sign-in-first']/div[6]/div/button/span/span[2]").click()
-
-driver.find_element(By.ID,"logon").send_keys(username)
-driver.find_element(By.ID,"pass").send_keys(password + Keys.ENTER)
-
-driver.implicitly_wait(50)
-time.sleep(30)
-driver.get(url1)
-
-
-time.sleep(2)
-elements = driver.find_elements(By.CSS_SELECTOR,"Button.btn single-date-select-button single-date-select-one-click btn-primary")
-for e in elements:
-    if(e.get_attribute("data-date-text")=="Nov 24, 2022"):
-        e.click()
 
 
 
 
-driver.close()
 
 
 
