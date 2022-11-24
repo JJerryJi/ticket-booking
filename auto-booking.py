@@ -7,8 +7,8 @@ from selenium.webdriver.common.keys import Keys
 
 
 # UCLA credentials
-username = "jerryji040506"
-password = "Jzx20040506!!"
+username = "UCLA Logon UserName"
+password = "UCLA Logon Password"
 
 
 # JWC - Badminton Ct #1
