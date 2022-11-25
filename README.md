@@ -24,8 +24,16 @@ Selenium is a web automation tool, which enables user to create step-by-step int
 
 In this program, Selenium is used to open Chrome's page, pinpoint HTML elements (namely "BOOK NOW" button), and async-wait until successfully booked the court.
 
-Run the following command to set up selenium in your Terminal:
+First, Run the following command to set up selenium in your Terminal:
+```
+pip install selenium
+```
 
-  pip install selenium
+Then, Download ChromeDriver through this link: https://sites.google.com/chromium.org/driver/
+
+(Note: you may need to find the version of your Chrome.)
+
+
+
 
 
